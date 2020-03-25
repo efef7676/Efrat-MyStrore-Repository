@@ -51,7 +51,7 @@ namespace Infrastructure
         public CatalogPage ClickOnAddToCart()
         {
             AddToCartButton.Click();
-            ParentElement.WaitAndGetElement(By.CssSelector("#layer_cart .button-container span .continue.btn.btn-default.button.exclusive-medium")).Click();
+            Driver.WaitAndGetElement(By.CssSelector(".continue.btn.btn-default.button.exclusive-medium")).Click();
 
             return new CatalogPage(Driver);
         }

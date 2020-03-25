@@ -16,6 +16,7 @@ namespace Tests
         {
             _driver = new ChromeDriver();
             _driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
+            _driver.Manage().Window.Maximize();
             HomePage = new HomePage(_driver);
         }
 
