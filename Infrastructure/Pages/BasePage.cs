@@ -14,5 +14,12 @@ namespace Infrastructure
         public BasePage(IWebDriver driver) : base(driver)
         {
         }
+
+        public HomePage ClickOnMainLogo()
+        {
+            MainLogo.Click();
+
+            return new HomePage(Driver);
+        }
     }
 }

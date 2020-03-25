@@ -22,7 +22,9 @@ namespace Tests
         [TestMethod]
         public void TryFirst()
         {
-            HomePage.Categories.ClickOnWomen();
+            var a = HomePage.Categories.ClickOnWomen()
+                .Products;
+            a[0].StandOnProduct().Products[0].ClickOnAddToCart();
         }
 
         [TestCleanup]

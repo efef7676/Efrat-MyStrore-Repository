@@ -8,3 +8,7 @@ C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\WebDriver.xml
 C:\Visual Studio Git\MyStoreAutomation\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
 C:\Visual Studio Git\MyStoreAutomation\Tests\obj\Debug\Tests.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\obj\Debug\Tests.pdb
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Core.dll
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Extensions.dll
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Core.pdb
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Extensions.pdb

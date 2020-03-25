@@ -11,7 +11,7 @@ namespace Infrastructure
     {
         protected IWebElement ParentElement { get; set; }
 
-        public BaseComponent(IWebElement parentElement, IWebDriver driver) : base(driver)
+        public BaseComponent(IWebDriver driver, IWebElement parentElement) : base(driver)
         {
             ParentElement = parentElement;
         }
