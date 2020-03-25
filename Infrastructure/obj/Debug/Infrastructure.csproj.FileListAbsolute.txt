@@ -1,0 +1,7 @@
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Infrastructure.dll
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Infrastructure.pdb
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.dll
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.xml
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\obj\Debug\Infrastructure.dll
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\obj\Debug\Infrastructure.pdb
