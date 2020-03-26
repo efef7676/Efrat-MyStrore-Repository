@@ -10,8 +10,8 @@ namespace Infrastructure
 {
     public class HomePage : BasePage
     {
-        public Categories Categories => new Categories(Driver, Driver.WaitAndGetElement(By.CssSelector("#block_top_menu ul")));
-        private IWebElement CartButton => Driver.WaitAndGetElement(By.CssSelector(".shopping_cart a"));
+        public Categories Categories => new Categories(Driver, Driver.WaitAndFindElement(By.CssSelector("#block_top_menu ul")));
+        private IWebElement CartButton => Driver.WaitAndFindElement(By.CssSelector(".shopping_cart a"));
 
         public HomePage(IWebDriver driver) : base(driver)
         {

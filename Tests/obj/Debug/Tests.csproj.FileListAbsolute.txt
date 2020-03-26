@@ -12,3 +12,8 @@ C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Core.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Extensions.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Core.pdb
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Extensions.pdb
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\FluentAssertions.dll
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\System.ValueTuple.dll
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\FluentAssertions.pdb
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\FluentAssertions.xml
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\System.ValueTuple.xml

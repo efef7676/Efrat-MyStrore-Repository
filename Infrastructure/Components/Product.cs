@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Extensions;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Infrastructure
 {
-    public class Product : BaseComponent
+    public class Product : GeneralProduct
     {
         private List<IWebElement> Colors => ParentElement.FindElements(By.CssSelector(".color_to_pick_list.clearfix li a")).ToList();
-        private IWebElement AddToCartButton => ParentElement.WaitAndGetElement(By.CssSelector(".button-container a"));
-        private IWebElement Price => ParentElement.WaitAndGetElement(By.CssSelector(".content_price .price.product-price"));
-        private IWebElement ImageButton => ParentElement.WaitAndGetElement(By.CssSelector("a .product_img_link"));
+        private IWebElement AddToCartButton => ParentElement.WaitAndFindElement(By.CssSelector(".button-container a"));
+        private IWebElement Price => ParentElement.WaitAndFindElement(By.CssSelector(".content_price .price.product-price"));
+        private IWebElement Image => ParentElement.WaitAndFindElement(By.CssSelector("a .product_img_link"));
 
         public Product(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
         {
@@ -24,7 +25,7 @@ namespace Infrastructure
         public CatalogPage StandOnProduct()
         {
             Actions action = new Actions(Driver);
-            action.MoveToElement(ParentElement.FindElement(By.CssSelector(".left-block"))).Perform();
+            action.MoveToElement(ParentElement.WaitAndFindElement(By.CssSelector(".left-block"))).Perform();
 
             return new CatalogPage(Driver);
         }
@@ -39,22 +40,34 @@ namespace Infrastructure
             return null;
         }
 
-        public Color GetColorHex(int index = 0)
+        public Color GetColor(int index = 0)
         {
             if (index < Colors.Count)
             {
-                return ColorTranslator.FromHtml(Colors[index].GetCssValue("background"));
+                string backgroundRgba = Colors[index].GetCssValue("background-color");
+
+                return backgroundRgba.ConvertToColor();
             }
             return new Color();
         }
 
-        public CatalogPage ClickOnAddToCart()
+        public BasePage ClickOnAddToCart(bool ContinueShopping = true)
         {
             AddToCartButton.Click();
-            Driver.WaitAndGetElement(By.CssSelector(".continue.btn.btn-default.button.exclusive-medium")).Click();
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            return new CatalogPage(Driver);
+            if (ContinueShopping)
+            {
+                Driver.FindElement(By.CssSelector("#layer_cart .continue.btn.btn-default.button.exclusive-medium")).Click();
+
+                return new CatalogPage(Driver);
+            }
+
+            Driver.FindElement(By.CssSelector("#layer_cart .btn.btn-default.button.button-medium")).Click();
+
+            return new CartPage(Driver);
         }
+
         public string GetPriceString() => Price.Text;
 
         public double GetPrice()
@@ -62,11 +75,6 @@ namespace Infrastructure
             return double.Parse(Price.Text.Substring(1));
         }
 
-        public ProductPage ClickOnImageButton()
-        {
-            ImageButton.Click();
-
-            return new ProductPage(Driver);
-        }    
+        public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
     }
 }

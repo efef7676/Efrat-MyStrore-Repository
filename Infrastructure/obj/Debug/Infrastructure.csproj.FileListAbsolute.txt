@@ -9,3 +9,5 @@ C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Core.dll
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Extensions.dll
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Core.pdb
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Extensions.pdb
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.Support.dll
+C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.Support.xml

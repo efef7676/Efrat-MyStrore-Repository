@@ -16,5 +16,10 @@ namespace Infrastructure
         public CartPage(IWebDriver driver) : base(driver)
         {
         }
+
+        public ProductRow GetProductRowBy(Uri uri)
+        {
+           return Products.FirstOrDefault(p => p.GetImageUri() == uri);
+        }
     }
 }

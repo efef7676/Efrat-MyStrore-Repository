@@ -10,9 +10,9 @@ namespace Infrastructure
 {
     public class QtyBox : BaseComponent
     {
-        private IWebElement QtyValue => ParentElement.WaitAndGetElement(By.CssSelector("input[name=quantity_5_19_0_0_hidden]"));
-        private IWebElement DownButton => ParentElement.WaitAndGetElement(By.CssSelector("a #cart_quantity_down_5_19_0_0"));
-        private IWebElement UpButton => ParentElement.WaitAndGetElement(By.CssSelector("a #cart_quantity_up_5_19_0_0"));
+        private IWebElement QtyValue => ParentElement.WaitAndFindElement(By.CssSelector("input[name=quantity_5_19_0_0_hidden]"));
+        private IWebElement DownButton => ParentElement.WaitAndFindElement(By.CssSelector("a #cart_quantity_down_5_19_0_0"));
+        private IWebElement UpButton => ParentElement.WaitAndFindElement(By.CssSelector("a #cart_quantity_up_5_19_0_0"));
         //check these selectors
 
         public QtyBox(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
@@ -21,8 +21,24 @@ namespace Infrastructure
 
         public int GetQtyValue() => int.Parse(QtyValue.GetAttribute("value"));
 
-        public void ClickOnUpButton() => UpButton.Click();
+        public CartPage ClickOnUpButton()
+        {
+            UpButton.Click();
 
-        public void ClickDownUpButton() => DownButton.Click();
+            return new CartPage(Driver);
+        }
+        public CartPage ClickDownUpButton()
+        {
+            DownButton.Click();
+
+            return new CartPage(Driver);
+        }
+        public CartPage ChangeQty(double number)
+        {
+            QtyValue.Clear();
+            QtyValue.SendKeys($"{number}");
+
+            return new CartPage(Driver);
+        }
     }
 }
