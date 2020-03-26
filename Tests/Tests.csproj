@@ -63,15 +63,23 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="CartPageTests.cs" />
+    <Compile Include="CatalogPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Assertions\Assertions.csproj">
+      <Project>{11ad0998-40f1-4e33-99db-c8dfb4666bff}</Project>
+      <Name>Assertions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{39D0768A-AA67-49F0-A66E-EA0533EEE9DD}</Project>
       <Name>Infrastructure</Name>

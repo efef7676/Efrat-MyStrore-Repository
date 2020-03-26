@@ -15,16 +15,29 @@ namespace Extensions
     {
         public static IWebElement WaitAndFindElement(this ISearchContext iSearchContext, By by)
         {
-            var wait = new DefaultWait<ISearchContext>(iSearchContext);
-            wait.Timeout = TimeSpan.FromSeconds(15);
-            return wait.Until(ctx =>
+            try
             {
-                var elem = ctx.FindElement(by);
-                if (!elem.Enabled||!elem.Displayed)
-                    return null;
-                return elem;
-            });
-
+                var wait = new DefaultWait<ISearchContext>(iSearchContext);
+                wait.Timeout = TimeSpan.FromSeconds(10);
+                return wait.Until(ctx =>
+                {
+                    try
+                    {
+                        var elem = ctx.FindElement(by);
+                        if (!elem.Enabled || !elem.Displayed)
+                            return null;
+                        return elem;
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        return null;
+                    }
+                });
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
     }

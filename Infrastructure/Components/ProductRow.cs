@@ -10,10 +10,10 @@ namespace Infrastructure
 {
     public class ProductRow : GeneralProduct
     {
-        private IWebElement DeleteButton => ParentElement.WaitAndFindElement(By.CssSelector("td .cart_delete.text-center"));
-        private IWebElement Price => ParentElement.WaitAndFindElement(By.CssSelector("td .cart_total span"));
-        private IWebElement Image => ParentElement.WaitAndFindElement(By.CssSelector("td .cart_product a"));
-        public QtyBox QtyBox => new QtyBox(Driver, ParentElement.WaitAndFindElement(By.CssSelector("td .cart_quantity.text-center")));
+        private IWebElement DeleteButton => ParentElement.WaitAndFindElement(By.CssSelector(".cart_delete.text-center a"));
+        private IWebElement Price => ParentElement.WaitAndFindElement(By.CssSelector(".cart_total span"));
+        protected override IWebElement Image => ParentElement.WaitAndFindElement(By.CssSelector(".cart_product a"));
+        public QtyBox QtyBox => new QtyBox(Driver, ParentElement.WaitAndFindElement(By.CssSelector(".cart_quantity.text-center")));
 
 
         public ProductRow(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
@@ -30,5 +30,7 @@ namespace Infrastructure
         public string GetPrice => Price.Text;
 
         public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
+
+        public override ProductPage ClickOnImage() => base.ClickOnImage();
     }
 }

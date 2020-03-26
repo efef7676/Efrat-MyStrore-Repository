@@ -61,6 +61,7 @@
     <Compile Include="Components\SummarizedProduct.cs" />
     <Compile Include="Components\ViewedProducts.cs" />
     <Compile Include="DriverUser.cs" />
+    <Compile Include="Interfaces\IHasProducts.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Components\BaseComponent.cs" />
     <Compile Include="Pages\CartPage.cs" />
@@ -69,9 +70,7 @@
     <Compile Include="Pages\ProductPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e26d93f4-c826-4594-8563-67e5063d730c}</Project>

@@ -9,14 +9,14 @@ namespace Infrastructure
 {
     public abstract class GeneralProduct : BaseComponent
     {
-        protected IWebElement Image { get; }
+        protected abstract IWebElement Image { get; }
 
         public GeneralProduct(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
         {
         }
 
         public abstract Uri GetImageUri();
-        public ProductPage ClickOnImage()
+        public virtual ProductPage ClickOnImage()
         {
             Image.Click();
 

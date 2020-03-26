@@ -1,7 +1,6 @@
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Tests.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Tests.pdb
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Infrastructure.dll
-C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\WebDriver.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Infrastructure.pdb
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\WebDriver.xml
@@ -17,3 +16,5 @@ C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\System.ValueTuple.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\FluentAssertions.pdb
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\FluentAssertions.xml
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\System.ValueTuple.xml
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Assertions.dll
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Assertions.pdb

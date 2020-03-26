@@ -13,8 +13,9 @@ namespace Tests
     {
         protected HomePage HomePage;
         private IWebDriver _driver;
+
         [TestInitialize]
-        public void TestInitialize()
+        public virtual void TestInitialize()
         {
             _driver = new ChromeDriver();
             _driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
@@ -22,39 +23,6 @@ namespace Tests
             HomePage = new HomePage(_driver);
         }
 
-        [TestMethod]
-        public void TryFirst()
-        {
-            HomePage.Categories.ClickOnWomen()
-                .StandOnProduct(1)
-                .ClickOnAddToCart();
-        }
-
-        [TestMethod]
-        public void TrySecond()
-        {
-            var selectedProduct = HomePage.Categories.ClickOnWomen()
-                .StandOnProduct(0);
-            selectedProduct.GetColor(0).Should().Be(selectedProduct.ClickOnColor(0)
-                .GetSelectedColor());
-        }
-        [TestMethod]
-        public void TryThird()
-        {
-            var selectedProduct = HomePage.Categories.ClickOnWomen()
-                .StandOnProduct(0).ClickOnImage();
-            var viewedProducts = selectedProduct.ClickOnMainLogo()
-                 .Categories.ClickOnWomen().ViewedProductsComponent.SummarizedProducts;
-            //fluent assertion extension - on url(?), the method gets list<summarizedProducts> and check any url in all
-            //or on ViewedProductsComponent and the method should get url.
-        }
-        [TestMethod]
-        public void TryFourth()
-        {
-            var cartPage = HomePage.Categories.ClickOnWomen()
-                .StandOnProduct(0).ClickOnAddToCart(false) as CartPage;
-            
-        }
         [TestCleanup]
         public void TestCleanup()
         {

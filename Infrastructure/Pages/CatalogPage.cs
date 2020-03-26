@@ -9,7 +9,7 @@ using Extensions;
 
 namespace Infrastructure
 {
-    public class CatalogPage : BasePage
+    public class CatalogPage : BasePage, IHasProducts<Product>
     {
         public List<Product> Products => Driver.FindElements(By.CssSelector(".product_list.grid.row li .product-container")).Select(s => new Product(Driver, s)).ToList();
 
@@ -37,7 +37,7 @@ namespace Infrastructure
             return new CatalogPage(Driver);
         }
 
-        public Product GetProductRowBy(Uri uri)
+        public Product GetProductBy(Uri uri)
         {
             return Products.FirstOrDefault(p => p.GetImageUri() == uri);
         }

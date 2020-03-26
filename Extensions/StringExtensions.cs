@@ -12,8 +12,6 @@ namespace Extensions
     {
         public static Color ConvertToColor(this string rgbColor)
         {
-            //Regex regex = new Regex(@"rgb\((?<r>\d{1,3}),(?<g>\d{1,3}),(?<b>\d{1,3})\)");
-            //Regex regex = new Regex(@"/^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d*(?:\.\d+)?)\)$/");
             Regex regex = new Regex(@"^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d*(?:\.\d+)?)\)$");
             Match match = regex.Match(rgbColor);
             if (match.Success)

@@ -10,7 +10,7 @@ namespace Infrastructure
 {
     public class SummarizedProduct : GeneralProduct
     {
-        private IWebElement Image => ParentElement.WaitAndFindElement(By.CssSelector("a img"));
+        protected override IWebElement Image => ParentElement.WaitAndFindElement(By.CssSelector("a"));
         private IWebElement Title => ParentElement.WaitAndFindElement(By.CssSelector("h5 a"));
         private IWebElement Description => ParentElement.WaitAndFindElement(By.CssSelector("p .product-description"));
 
@@ -28,5 +28,7 @@ namespace Infrastructure
         public string GetDescription() => Description.Text;
 
         public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
+
+        public override ProductPage ClickOnImage()=> base.ClickOnImage();
     }
 }

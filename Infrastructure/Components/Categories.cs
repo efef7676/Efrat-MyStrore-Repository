@@ -13,7 +13,6 @@ namespace Infrastructure
         private IWebElement WomenCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text == "WOMEN");
         private IWebElement DressesCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text == "Dresses");
         private IWebElement TShirtsCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text == "T-shirts");
-        //add extension - WaitAndGetISearchContext!!! the code above doesn't work with find elemets..
 
         public Categories(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
         {
