@@ -10,9 +10,9 @@ namespace Infrastructure
 {
     public class QtyBox : BaseComponent
     {
-        private IWebElement QtyValue => ParentElement.WaitAndFindElement(By.CssSelector("input[name=quantity_5_19_0_0_hidden]"));
-        private IWebElement DownButton => ParentElement.WaitAndFindElement(By.CssSelector("a #cart_quantity_down_5_19_0_0"));
-        private IWebElement UpButton => ParentElement.WaitAndFindElement(By.CssSelector("a #cart_quantity_up_5_19_0_0"));
+        private IWebElement QtyValue => ParentElement.WaitAndFindElement(By.CssSelector(".cart_quantity_input.form-control.grey"));
+        private IWebElement DownButton => ParentElement.WaitAndFindElement(By.CssSelector(".cart_quantity_down.btn.btn-default.button-minus"));
+        private IWebElement UpButton => ParentElement.WaitAndFindElement(By.CssSelector(".cart_quantity_up.btn.btn-default.button-plus"));
         //check these selectors
 
         public QtyBox(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)

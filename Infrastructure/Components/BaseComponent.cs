@@ -9,7 +9,7 @@ namespace Infrastructure
 {
     public abstract class BaseComponent : DriverUser
     {
-        protected IWebElement ParentElement { get; set; }
+        public IWebElement ParentElement { get; set; }
 
         public BaseComponent(IWebDriver driver, IWebElement parentElement) : base(driver)
         {

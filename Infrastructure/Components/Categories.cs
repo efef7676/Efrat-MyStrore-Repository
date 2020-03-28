@@ -10,9 +10,9 @@ namespace Infrastructure
 {
     public class Categories : BaseComponent
     {
-        private IWebElement WomenCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text == "WOMEN");
-        private IWebElement DressesCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text == "Dresses");
-        private IWebElement TShirtsCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text == "T-shirts");
+        private IWebElement WomenCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text.ToLower() == "women");
+        private IWebElement DressesCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text.ToLower() == "dresses");
+        private IWebElement TShirtsCategory => ParentElement.FindElements(By.CssSelector("li a")).FirstOrDefault(el => el.Text.ToLower() == "t-shirts");
 
         public Categories(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
         {

@@ -18,3 +18,5 @@ C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\FluentAssertions.xml
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\System.ValueTuple.xml
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Assertions.dll
 C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\Assertions.pdb
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\WebDriver.Support.dll
+C:\Visual Studio Git\MyStoreAutomation\Tests\bin\Debug\WebDriver.Support.xml

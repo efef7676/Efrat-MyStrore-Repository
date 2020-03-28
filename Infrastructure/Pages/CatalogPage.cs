@@ -12,7 +12,7 @@ namespace Infrastructure
     public class CatalogPage : BasePage, IHasProducts<Product>
     {
         public List<Product> Products => Driver.FindElements(By.CssSelector(".product_list.grid.row li .product-container")).Select(s => new Product(Driver, s)).ToList();
-
+              
         public ViewedProducts ViewedProductsComponent => new ViewedProducts(Driver, Driver.WaitAndFindElement(By.CssSelector("#viewed-products_block_left")));
 
         public CatalogPage(IWebDriver driver) : base(driver)

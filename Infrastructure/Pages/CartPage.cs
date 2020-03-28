@@ -5,22 +5,85 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Extensions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Infrastructure
 {
     public class CartPage : BasePage, IHasProducts<ProductRow>
     {
-        public List<ProductRow> Products => Driver.WaitAndFindElement(By.CssSelector("#cart_summary tbody"))
-            .FindElements(By.CssSelector("tr"))
-            .Select(s=> new ProductRow(Driver, s)).ToList();
+        private List<ProductRow> _products;
+        public List<ProductRow> Products
+        {
+            get
+            {
+                var elements = Driver.FindElements(By.CssSelector("#cart_summary tbody tr"));
+                return elements == null ? _products : elements.Select(s => new ProductRow(Driver, s)).ToList();
+            }
+            set
+            {
+                _products = value;
+            }
+        }
 
         public CartPage(IWebDriver driver) : base(driver)
         {
+            _products = new List<ProductRow>();
         }
 
-        public ProductRow GetProductBy(Uri ImagetUri)
+        public ProductRow GetProductBy(Uri imageUri)
         {
-           return Products.FirstOrDefault(p => p.GetImageUri() == ImagetUri);
+            return Products.FirstOrDefault(p => p.GetImageUri() == imageUri);
+        }
+
+        public CartPage DeleteProductBy(Uri imageUri)
+        {
+            GetProductBy(imageUri).ClickOnDeleteButton();
+            Driver.WaitToElementToDisappear(By.CssSelector($"tbody a[href='{imageUri}']"));
+
+            return new CartPage(Driver);
+        }
+        public ProductRow ChangeQtyOneMore(bool RaiseQty, Uri imageUri)
+        {
+            var currentProduct = GetProductBy(imageUri);
+            var newQty= currentProduct.QtyBox.GetQtyValue();
+            if (RaiseQty)
+            {
+                newQty += 1;
+                currentProduct.QtyBox.ClickOnUpButton();
+
+            }
+            else if(newQty> 1)
+            {
+                newQty -= 1;
+                currentProduct.QtyBox.ClickDownUpButton();
+            }
+            else
+            {
+                return null;
+                //throw an exception?
+            }
+
+            currentProduct
+                .QtyBox
+                .ParentElement
+                .WaitUntilElementIs(By.CssSelector(".cart_quantity_input.form-control.grey"), $"{newQty}");
+
+            return currentProduct;
+        }
+
+        public ProductRow ChangeQtyTo(double changeIn, Uri imageUri)
+        {
+            var currentProduct = GetProductBy(imageUri);
+            var newQty = changeIn;
+
+            currentProduct.QtyBox.ChangeQty(changeIn);
+
+            currentProduct
+                .QtyBox
+                .ParentElement
+                .WaitUntilElementIs(By.CssSelector(".cart_quantity_input.form-control.grey"), $"{newQty}");
+
+            return currentProduct;
         }
     }
 }

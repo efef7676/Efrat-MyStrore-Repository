@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Extensions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Infrastructure
 {
@@ -22,12 +23,13 @@ namespace Infrastructure
 
         public CartPage ClickOnDeleteButton()
         {
+            var imageUri = GetImageUri();
             DeleteButton.Click();
 
             return new CartPage(Driver);
         }
 
-        public string GetPrice => Price.Text;
+        public double GetPrice() => double.Parse(Price.Text.Substring(1));
 
         public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
 
