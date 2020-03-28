@@ -11,10 +11,11 @@ namespace Assertions
 {
     public class CatalogAssertions : ObjectAssertions
     {
+        protected override string Identifier => "CatalogAssertions";
+
         public CatalogAssertions(CatalogPage value) : base(value)
         {
         }
-        protected override string Identifier => "CatalogAssertions";
 
         [CustomAssertion]
         public AndConstraint<CatalogAssertions> BeExistsInViewedProductsList(Uri expectedImageUri)

@@ -52,6 +52,7 @@
     <Compile Include="CartAssertions.cs" />
     <Compile Include="CatalogAssertions.cs" />
     <Compile Include="AssertionsExtensions.cs" />
+    <Compile Include="GeneralProductAssertions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

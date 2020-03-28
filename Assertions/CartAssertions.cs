@@ -11,10 +11,11 @@ namespace Assertions
 {
     public class CartAssertions : ObjectAssertions
     {
+        protected override string Identifier => "CartAssertions";
+
         public CartAssertions(CartPage value) : base(value)
         {
         }
-        protected override string Identifier => "CartAssertions";
 
         [CustomAssertion]
         public AndConstraint<CartAssertions> BeExistsInCart(Uri expectedImageUri)
@@ -22,6 +23,16 @@ namespace Assertions
             (Subject as CartPage)
                 .GetProductBy(expectedImageUri)
                 .Should().NotBeNull();
+
+            return new AndConstraint<CartAssertions>(this);
+        }
+
+        [CustomAssertion]
+        public AndConstraint<CartAssertions> BeDeletedSuccessfully(Uri expectedImageUri)
+        {
+            (Subject as CartPage)
+                .GetProductBy(expectedImageUri)
+                .Should().BeNull();
 
             return new AndConstraint<CartAssertions>(this);
         }

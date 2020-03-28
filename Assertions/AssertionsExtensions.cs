@@ -13,9 +13,15 @@ namespace Assertions
         {
             return new CatalogAssertions(instance);
         }
+
         public static CartAssertions Should(this CartPage instance)
         {
             return new CartAssertions(instance);
+        }
+
+        public static GeneralProductAssertions Should(this GeneralProduct instance)
+        {
+            return new GeneralProductAssertions(instance);
         }
     }
 }
