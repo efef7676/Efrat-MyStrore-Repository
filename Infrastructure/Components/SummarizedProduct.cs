@@ -18,17 +18,17 @@ namespace Infrastructure
         {
         }
 
+        public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
+
+        public override ProductPage ClickOnImage()=> base.ClickOnImage();
+
+        public string GetDescription() => Description.Text;
+
         public ProductPage ClickOnTitle()
         {
             Title.Click();
 
             return new ProductPage(Driver);
         }
-
-        public string GetDescription() => Description.Text;
-
-        public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
-
-        public override ProductPage ClickOnImage()=> base.ClickOnImage();
     }
 }

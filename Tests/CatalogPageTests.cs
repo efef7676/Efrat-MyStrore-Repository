@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using Infrastructure;
 using Assertions;
+using System.Linq;
 
 namespace Tests
 {
@@ -16,10 +17,9 @@ namespace Tests
         {
             var selectedProduct = HomePage.Categories.ClickOnWomen().StandOnProduct(0);
 
-            selectedProduct.GetColor(0)
+            selectedProduct.GetColor(1)
                 .Should()
-                .Be(selectedProduct.ClickOnColor(0)
-                .GetSelectedColor());
+                .Be(selectedProduct.ClickOnColor(1).GetSelectedColor());
         }
 
         [TestMethod]
@@ -45,6 +45,37 @@ namespace Tests
             (selectedProduct.ClickOnAddToCart(false) as CartPage)
                 .Should()
                 .BeExistsInCart(expectedImageUri);
+        }
+
+        [TestMethod]
+        public void WhileMouseIsntOnProduct_AddToCartButtonNotAvailable()
+        {
+            HomePage.Categories.ClickOnWomen()
+                .Products[3]
+                .IsAddToCartAvailable
+                .Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void WhileMouseIsOnProduct_AddToCartButtonAvailable()
+        {
+            HomePage.Categories.ClickOnWomen()
+                .StandOnProduct(4)
+                .IsAddToCartAvailable
+                .Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void FilterByColor_ShowProductsInSelectedColor()
+        {
+            var cartPage = HomePage.Categories.ClickOnWomen();
+            var selectedColor = cartPage.FilterByColor.GetColor(4);
+
+            cartPage
+                .FilterByColor.ClickOnColor(4)
+                .Products
+                .Should()
+                .BeBySelectedColor(selectedColor);
         }
     }
 }

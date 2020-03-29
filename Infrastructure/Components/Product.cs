@@ -18,17 +18,35 @@ namespace Infrastructure
         private IWebElement Price => ParentElement.WaitAndFindElement(By.CssSelector(".content_price .price.product-price"));
         private IWebElement Name => ParentElement.WaitAndFindElement(By.CssSelector(".right-block .product-name"));
         protected override IWebElement Image => ParentElement.WaitAndFindElement(By.CssSelector(".product-image-container .product_img_link"));
+        public bool IsAddToCartAvailable => AddToCartButton == null ? false : true;
 
         public Product(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
         {
         }
 
+        public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
+
+        public override ProductPage ClickOnImage() => base.ClickOnImage();
+
+        public double GetPrice() => double.Parse(Price.Text.Substring(1));
+
+        public List<Color> GetColors()=>Colors.Select(s=>s.GetCssValue("background-color").ConvertToColor()).ToList();
+        
+
         public CatalogPage StandOnProduct()
         {
-            Actions action = new Actions(Driver);
-            action.MoveToElement(ParentElement.WaitAndFindElement(By.CssSelector(".left-block"))).Perform();
+            ParentElement.StandOn(Driver, By.CssSelector(".left-block"));
 
             return new CatalogPage(Driver);
+        }
+
+        public Color GetColor(int index = 0)
+        {
+            if (index < Colors.Count)
+            {
+                return Colors[index].GetCssValue("background-color").ConvertToColor();
+            }
+            return new Color();//maybe return null / throw an exception?
         }
 
         public ProductPage ClickOnColor(int index = 0)
@@ -42,15 +60,11 @@ namespace Infrastructure
             return null;
         }
 
-        public Color GetColor(int index = 0)
+        public ProductPage ClickOnName()
         {
-            if (index < Colors.Count)
-            {
-                string backgroundRgba = Colors[index].GetCssValue("background-color");
+            Name.Click();
 
-                return backgroundRgba.ConvertToColor();
-            }
-            return new Color();
+            return new ProductPage(Driver);
         }
 
         public BasePage ClickOnAddToCart(bool ContinueShopping = true)
@@ -61,6 +75,7 @@ namespace Infrastructure
             }
 
             AddToCartButton.Click();
+
             if (ContinueShopping)
             {
                 Driver.WaitAndFindElement(By.CssSelector("#layer_cart .continue.btn.btn-default.button.exclusive-medium")).Click();
@@ -71,21 +86,6 @@ namespace Infrastructure
             Driver.WaitAndFindElement(By.CssSelector("#layer_cart .btn.btn-default.button.button-medium")).Click();
 
             return new CartPage(Driver);
-        }
-
-        public string GetPriceString() => Price.Text;
-
-        public double GetPrice() => double.Parse(Price.Text.Substring(1));
-
-        public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
-
-        public override ProductPage ClickOnImage() => base.ClickOnImage();
-
-        public ProductPage ClickOnName()
-        {
-            Name.Click();
-
-            return new ProductPage(Driver);
         }
 
     }

@@ -41,7 +41,7 @@
       <HintPath>..\packages\FluentAssertions.5.10.3\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -75,6 +75,10 @@
     <ProjectReference Include="..\Assertions\Assertions.csproj">
       <Project>{11ad0998-40f1-4e33-99db-c8dfb4666bff}</Project>
       <Name>Assertions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{e26d93f4-c826-4594-8563-67e5063d730c}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{39D0768A-AA67-49F0-A66E-EA0533EEE9DD}</Project>

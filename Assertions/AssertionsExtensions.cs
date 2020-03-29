@@ -23,5 +23,10 @@ namespace Assertions
         {
             return new GeneralProductAssertions(instance);
         }
+
+        public static ProductListAssertions Should(this List<Product> instance)
+        {
+            return new ProductListAssertions(instance);
+        }
     }
 }

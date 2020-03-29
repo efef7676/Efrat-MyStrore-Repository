@@ -16,11 +16,6 @@ namespace Infrastructure
         {
         }
 
-        public Color GetSelectedColor()
-        {
-            string backgroundRgba = SelectedColor.GetCssValue("background-color");
-
-            return backgroundRgba.ConvertToColor();
-        }
+        public Color GetSelectedColor() => SelectedColor.GetCssValue("background-color").ConvertToColor();
     }
 }

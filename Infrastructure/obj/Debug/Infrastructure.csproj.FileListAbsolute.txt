@@ -5,9 +5,7 @@ C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.xml
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\obj\Debug\Infrastructure.csprojResolveAssemblyReference.cache
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\obj\Debug\Infrastructure.dll
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\obj\Debug\Infrastructure.pdb
-C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Core.dll
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Extensions.dll
-C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Core.pdb
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\Extensions.pdb
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.Support.dll
 C:\Visual Studio Git\MyStoreAutomation\Infrastructure\bin\Debug\WebDriver.Support.xml

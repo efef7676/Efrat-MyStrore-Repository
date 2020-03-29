@@ -12,12 +12,14 @@ namespace Infrastructure
         public List<SummarizedProduct> Products => ParentElement
             .FindElements(By.CssSelector(".block_content.products-block ul li"))
             .Select(s => new SummarizedProduct(Driver, s)).ToList();
+
         public ViewedProducts(IWebDriver driver, IWebElement parentElement) : base(driver, parentElement)
         {
         }
-        public SummarizedProduct GetProductBy(Uri uri)
+
+        public SummarizedProduct GetProductBy(Uri imageUri)
         {
-            return Products.FirstOrDefault(p => p.GetImageUri() == uri);
+            return Products.FirstOrDefault(p => p.GetImageUri() == imageUri);
         }
     }
 }

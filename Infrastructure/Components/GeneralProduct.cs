@@ -16,6 +16,7 @@ namespace Infrastructure
         }
 
         public abstract Uri GetImageUri();
+
         public virtual ProductPage ClickOnImage()
         {
             Image.Click();

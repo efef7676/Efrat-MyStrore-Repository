@@ -23,14 +23,14 @@ namespace Assertions
             if (raisePrice)
             {
                 (Subject as ProductRow)
-                                .GetPrice()
+                                .GetTotalPrice()
                                 .Should()
                                 .Be((originQtyValue + changeIn) * originPrice);
 
             }else
             {
                 (Subject as ProductRow)
-                                .GetPrice()
+                                .GetTotalPrice()
                                 .Should()
                                 .Be((originQtyValue - changeIn) * originPrice);
             }

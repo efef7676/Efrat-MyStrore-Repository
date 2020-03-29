@@ -12,16 +12,22 @@ namespace Infrastructure
     public class CatalogPage : BasePage, IHasProducts<Product>
     {
         public List<Product> Products => Driver.FindElements(By.CssSelector(".product_list.grid.row li .product-container")).Select(s => new Product(Driver, s)).ToList();
-              
+
         public ViewedProducts ViewedProductsComponent => new ViewedProducts(Driver, Driver.WaitAndFindElement(By.CssSelector("#viewed-products_block_left")));
+
+        public FilterByColor FilterByColor => new FilterByColor(Driver, Driver.WaitAndFindElement(By.CssSelector("#ul_layered_id_attribute_group_3")));
+
+        public FilterByPrice FilterByPrice => new FilterByPrice(Driver, Driver.WaitAndFindElement(By.CssSelector("#ul_layered_price_0")));
 
         public CatalogPage(IWebDriver driver) : base(driver)
         {
         }
 
-        public Product StandOnProduct(int index=0)
+        public Product GetProductBy(Uri uri) => Products.FirstOrDefault(p => p.GetImageUri() == uri);
+
+        public Product StandOnProduct(int index = 0)
         {
-            if(index<= Products.Count)
+            if (index < Products.Count)
             {
                 Products[index].StandOnProduct();
             }
@@ -31,15 +37,22 @@ namespace Infrastructure
 
         public CatalogPage NotStandingOnProducts()
         {
-            Actions action = new Actions(Driver);
-            action.MoveToElement(Driver.FindElement(By.CssSelector("#header"))).Perform();
+            Driver.StandOn(Driver, By.CssSelector("#header"));
 
             return new CatalogPage(Driver);
         }
 
-        public Product GetProductBy(Uri uri)
+        public CatalogPage AddNProductsToCart(int numberOfProductsToAdd)
         {
-            return Products.FirstOrDefault(p => p.GetImageUri() == uri);
+            if (numberOfProductsToAdd < Products.Count)
+            {
+                for (int i = 0; i < numberOfProductsToAdd; i++)
+                {
+                    StandOnProduct(i).ClickOnAddToCart(true);
+                }
+            }
+
+            return new CatalogPage(Driver);
         }
     }
 }

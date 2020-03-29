@@ -18,23 +18,23 @@ namespace Extensions
             try
             {
                 var wait = new DefaultWait<ISearchContext>(iSearchContext);
-                wait.Timeout = TimeSpan.FromSeconds(15);
+                wait.Timeout = TimeSpan.FromSeconds(10);
                 return wait.Until(ctx =>
                 {
                     var elem = ctx.FindElement(by);
-                    wait.IgnoreExceptionTypes(typeof(Exception));
+                    wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
                     if (!elem.Enabled || !elem.Displayed)
                         return null;
                     return elem;
                 });
             }
-            catch (Exception)
+            catch (WebDriverTimeoutException)
             {
                 return null;
             }
         }
 
-        public static void WaitUntilElementIs(this ISearchContext iSearchContext, By by, string textValue)
+        public static void WaitUntilElementIs(this ISearchContext iSearchContext, By by, string expectedTextValue)
         {
             var wait = new DefaultWait<ISearchContext>(iSearchContext);
             wait.Timeout = TimeSpan.FromSeconds(20);
@@ -43,19 +43,14 @@ namespace Extensions
                 var elem = ctx.FindElement(by);
                 if (!elem.Enabled || !elem.Displayed)
                     return null;
-                if (elem.GetAttribute("value") == textValue)
+                if (elem.GetAttribute("value") == expectedTextValue)
                     return elem;
 
                 return null;
             });
         }
-        public static void WaitToElementToDisappear(this IWebDriver driver, By by)
-        {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(25));
-            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(by));
-        }
 
-        public static void WaitToElementToDisappearSecond(this ISearchContext iSearchContext, By by)
+        public static void WaitUntilElementDoesntExists(this ISearchContext iSearchContext, By by)
         {
             var wait = new DefaultWait<ISearchContext>(iSearchContext);
             wait.Timeout = TimeSpan.FromSeconds(20);
@@ -63,7 +58,7 @@ namespace Extensions
             {
                 try
                 {
-                    return !(p.FindElement(by).Displayed);
+                    return !(p.FindElement(by).Enabled);
                 }
                 catch (NoSuchElementException)
                 {
@@ -74,6 +69,11 @@ namespace Extensions
                     return true;
                 }
             });
+        }
+        public static void StandOn(this ISearchContext searchContext, IWebDriver driver, By by)
+        {
+            Actions action = new Actions(driver);
+            action.MoveToElement(searchContext.WaitAndFindElement(by)).Perform();
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Infrastructure;
 using FluentAssertions;
 using System.Threading;
 using Assertions;
+using Core;
 using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
 {
@@ -14,16 +15,32 @@ namespace Tests
         [TestMethod]
         public void DeleteProductFromCart_WillSuccess()
         {
+            HomePage.Categories.ClickOnWomen().AddNProductsToCart(3);
+            var productToAdd = HomePage.Categories.ClickOnWomen()
+               .StandOnProduct(6);
+            var expectedImageUri = productToAdd.GetImageUri();
+            var currentCartPage = (productToAdd.ClickOnAddToCart(false) as CartPage);
+            var originAmount = currentCartPage.Products.Count;
+
+            currentCartPage
+                .DeleteProductBy(expectedImageUri)
+                .Should()
+                .BeDeletedSuccessfully(false, expectedImageUri, originAmount);
+        }
+        [TestMethod]
+        public void DeleteLastProductFromCart_WillSuccess()
+        {
             var productToAdd = HomePage.Categories.ClickOnWomen()
                .StandOnProduct(0);
             var expectedImageUri = productToAdd.GetImageUri();
+            var currentCartPage = (productToAdd.ClickOnAddToCart(false) as CartPage);
+            var originAmount = currentCartPage.Products.Count;
 
-            (productToAdd.ClickOnAddToCart(false) as CartPage)
+            currentCartPage
                 .DeleteProductBy(expectedImageUri)
                 .Should()
-                .BeDeletedSuccessfully(expectedImageUri);
+                .BeDeletedSuccessfully(true, expectedImageUri, originAmount);
         }
-
         [TestMethod]
         public void AddToQtyOfExistsProduct_WillSuccess()
         {
@@ -31,28 +48,13 @@ namespace Tests
                .StandOnProduct(0);
             var expectedImageUri = productToAdd.GetImageUri();
             var currentCartPage = (productToAdd.ClickOnAddToCart(false) as CartPage);
-            var originPrice = currentCartPage.GetProductBy(expectedImageUri).GetPrice();
-            var originQtyValue = currentCartPage.ChangeQtyOneMore(RaiseQty: true, imageUri: expectedImageUri).QtyBox.GetQtyValue();
-            //class of productRowStorge?
+            var productStorage = new ProductRowStorage(currentCartPage.GetProductBy(expectedImageUri));
 
             currentCartPage
-                .ChangeQtyOneMore(true, expectedImageUri)
+                .ChangeQtyInOne(true, expectedImageUri)
                 .Should()
-                .BeChangeQtySuccessfully(true, originQtyValue, originPrice);
+                .BeChangeQtySuccessfully(true, (int)productStorage.QtyValue, productStorage.UnitPrice);
         }
 
-        [TestMethod]
-        public void ChangeQtyToIrrationalNumber_WillFail()
-        {
-            var productToAdd = HomePage.Categories.ClickOnWomen()
-              .StandOnProduct(1);
-            var expectedImageUri = productToAdd.GetImageUri();
-            var currentCartPage = (productToAdd.ClickOnAddToCart(false) as CartPage);
-
-            var originPrice = currentCartPage.GetProductBy(expectedImageUri).GetPrice();
-            var originQtyValue = currentCartPage.ChangeQtyOneMore(RaiseQty: true, imageUri: expectedImageUri).QtyBox.GetQtyValue();
-            //class of productRowStorge?
-
-        }
     }
 }

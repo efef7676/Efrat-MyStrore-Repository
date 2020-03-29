@@ -30,29 +30,27 @@ namespace Infrastructure
             _products = new List<ProductRow>();
         }
 
-        public ProductRow GetProductBy(Uri imageUri)
-        {
-            return Products.FirstOrDefault(p => p.GetImageUri() == imageUri);
-        }
+        public ProductRow GetProductBy(Uri imageUri) => Products.FirstOrDefault(p => p.GetImageUri() == imageUri);
 
         public CartPage DeleteProductBy(Uri imageUri)
         {
             GetProductBy(imageUri).ClickOnDeleteButton();
-            Driver.WaitToElementToDisappear(By.CssSelector($"tbody a[href='{imageUri}']"));
+            Driver.WaitUntilElementDoesntExists(By.CssSelector($"tbody a[href='{imageUri}']"));
 
             return new CartPage(Driver);
         }
-        public ProductRow ChangeQtyOneMore(bool RaiseQty, Uri imageUri)
+
+        public ProductRow ChangeQtyInOne(bool RaiseQty, Uri imageUri)
         {
             var currentProduct = GetProductBy(imageUri);
-            var newQty= currentProduct.QtyBox.GetQtyValue();
+            var newQty = currentProduct.QtyBox.GetQtyValue();
+
             if (RaiseQty)
             {
                 newQty += 1;
                 currentProduct.QtyBox.ClickOnUpButton();
-
             }
-            else if(newQty> 1)
+            else if (!RaiseQty && newQty > 1)
             {
                 newQty -= 1;
                 currentProduct.QtyBox.ClickDownUpButton();
@@ -71,12 +69,12 @@ namespace Infrastructure
             return currentProduct;
         }
 
-        public ProductRow ChangeQtyTo(double changeIn, Uri imageUri)
+        public ProductRow ChangeQtyTo(double changeTo, Uri imageUri)
         {
             var currentProduct = GetProductBy(imageUri);
-            var newQty = changeIn;
+            var newQty = changeTo;
 
-            currentProduct.QtyBox.ChangeQty(changeIn);
+            currentProduct.QtyBox.ChangeQty(changeTo);
 
             currentProduct
                 .QtyBox
