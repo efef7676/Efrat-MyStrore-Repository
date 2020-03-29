@@ -1,10 +1,6 @@
-﻿using System;
-using Infrastructure;
+﻿using Infrastructure;
 using FluentAssertions;
-using System.Threading;
 using Assertions;
-using Core;
-using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests

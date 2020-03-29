@@ -1,12 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 
 
 namespace Extensions
@@ -18,13 +13,16 @@ namespace Extensions
             try
             {
                 var wait = new DefaultWait<ISearchContext>(iSearchContext);
-                wait.Timeout = TimeSpan.FromSeconds(10);
+                wait.Timeout = TimeSpan.FromSeconds(15);
                 return wait.Until(ctx =>
                 {
                     var elem = ctx.FindElement(by);
                     wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
                     if (!elem.Enabled || !elem.Displayed)
+                    {
                         return null;
+                    }
+
                     return elem;
                 });
             }
@@ -70,10 +68,8 @@ namespace Extensions
                 }
             });
         }
-        public static void StandOn(this ISearchContext searchContext, IWebDriver driver, By by)
-        {
-            Actions action = new Actions(driver);
-            action.MoveToElement(searchContext.WaitAndFindElement(by)).Perform();
-        }
+
+        public static void StandOn(this ISearchContext searchContext, IWebDriver driver, By by) =>
+            new Actions(driver).MoveToElement(searchContext.WaitAndFindElement(by)).Perform();
     }
 }

@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure
 {
@@ -17,11 +13,11 @@ namespace Infrastructure
 
         public abstract Uri GetImageUri();
 
-        public virtual ProductPage ClickOnImage()
+        public virtual DetailsProductPage ClickOnImage()
         {
             Image.Click();
 
-            return new ProductPage(Driver);
+            return new DetailsProductPage(Driver);
         }
     }
 }

@@ -2,12 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using Extensions;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 
 namespace Infrastructure
 {
@@ -26,12 +22,13 @@ namespace Infrastructure
 
         public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
 
-        public override ProductPage ClickOnImage() => base.ClickOnImage();
+        public override DetailsProductPage ClickOnImage() => base.ClickOnImage();
 
         public double GetPrice() => double.Parse(Price.Text.Substring(1));
 
-        public List<Color> GetColors()=>Colors.Select(s=>s.GetCssValue("background-color").ConvertToColor()).ToList();
-        
+        public List<Color> GetColors() => Colors.Select(s => s.GetCssValue("background-color").ConvertToColor()).ToList();
+
+        public Color GetColor(int index = 0) => Colors[index].GetCssValue("background-color").ConvertToColor();
 
         public CatalogPage StandOnProduct()
         {
@@ -40,42 +37,23 @@ namespace Infrastructure
             return new CatalogPage(Driver);
         }
 
-        public Color GetColor(int index = 0)
+        public DetailsProductPage ClickOnColor(int index = 0)
         {
-            if (index < Colors.Count)
-            {
-                return Colors[index].GetCssValue("background-color").ConvertToColor();
-            }
-            return new Color();//maybe return null / throw an exception?
+            Colors[index].Click();
+
+            return new DetailsProductPage(Driver);
         }
 
-        public ProductPage ClickOnColor(int index = 0)
-        {
-            if (index < Colors.Count)
-            {
-                Colors[index].Click();
-
-                return new ProductPage(Driver);
-            }
-            return null;
-        }
-
-        public ProductPage ClickOnName()
+        public DetailsProductPage ClickOnName()
         {
             Name.Click();
 
-            return new ProductPage(Driver);
+            return new DetailsProductPage(Driver);
         }
 
         public BasePage ClickOnAddToCart(bool ContinueShopping = true)
         {
-            if (AddToCartButton == null)
-            {
-                return null;
-            }
-
             AddToCartButton.Click();
-
             if (ContinueShopping)
             {
                 Driver.WaitAndFindElement(By.CssSelector("#layer_cart .continue.btn.btn-default.button.exclusive-medium")).Click();

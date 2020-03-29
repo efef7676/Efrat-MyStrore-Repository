@@ -11,8 +11,14 @@ namespace Infrastructure
 {
     public class CatalogPage : BasePage, IHasProducts<Product>
     {
-        public List<Product> Products => Driver.FindElements(By.CssSelector(".product_list.grid.row li .product-container")).Select(s => new Product(Driver, s)).ToList();
-
+        public List<Product> Products
+        {
+            get
+            {
+                var elements = Driver.FindElements(By.CssSelector(".product_list.grid.row li .product-container"));
+                return elements == null ? new List<Product>() : elements.Select(s => new Product(Driver, s)).ToList();
+            }
+        }
         public ViewedProducts ViewedProductsComponent => new ViewedProducts(Driver, Driver.WaitAndFindElement(By.CssSelector("#viewed-products_block_left")));
 
         public FilterByColor FilterByColor => new FilterByColor(Driver, Driver.WaitAndFindElement(By.CssSelector("#ul_layered_id_attribute_group_3")));

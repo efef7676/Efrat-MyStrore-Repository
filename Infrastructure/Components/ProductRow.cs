@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Extensions;
-using OpenQA.Selenium.Support.UI;
 
 namespace Infrastructure
 {
@@ -24,7 +19,7 @@ namespace Infrastructure
 
         public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
 
-        public override ProductPage ClickOnImage() => base.ClickOnImage();
+        public override DetailsProductPage ClickOnImage() => base.ClickOnImage();
 
         public double GetTotalPrice() => double.Parse(TotalPrice.Text.Substring(1));
 

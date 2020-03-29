@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Extensions;
 
@@ -20,15 +16,15 @@ namespace Infrastructure
 
         public override Uri GetImageUri() => new Uri(Image.GetAttribute("href"));
 
-        public override ProductPage ClickOnImage()=> base.ClickOnImage();
+        public override DetailsProductPage ClickOnImage()=> base.ClickOnImage();
 
         public string GetDescription() => Description.Text;
 
-        public ProductPage ClickOnTitle()
+        public DetailsProductPage ClickOnTitle()
         {
             Title.Click();
 
-            return new ProductPage(Driver);
+            return new DetailsProductPage(Driver);
         }
     }
 }

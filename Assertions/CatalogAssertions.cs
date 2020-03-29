@@ -2,10 +2,6 @@
 using FluentAssertions.Primitives;
 using Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assertions
 {
@@ -24,6 +20,7 @@ namespace Assertions
                 .ViewedProductsComponent
                 .GetProductBy(expectedImageUri)
                 .Should().NotBeNull();
+
             return new AndConstraint<CatalogAssertions>(this);
         }
 

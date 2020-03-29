@@ -1,11 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using Infrastructure;
 using Assertions;
-using System.Linq;
 
 namespace Tests
 {
@@ -76,6 +72,6 @@ namespace Tests
                 .Products
                 .Should()
                 .BeBySelectedColor(selectedColor);
-        }
+        }//Can't check this - problem with filters in website - not loading.
     }
 }

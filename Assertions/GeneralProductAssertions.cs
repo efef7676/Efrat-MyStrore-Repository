@@ -1,11 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Primitives;
 using Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assertions
 {
@@ -23,16 +18,15 @@ namespace Assertions
             if (raisePrice)
             {
                 (Subject as ProductRow)
-                                .GetTotalPrice()
-                                .Should()
-                                .Be((originQtyValue + changeIn) * originPrice);
-
+                    .GetTotalPrice()
+                    .Should()
+                    .Be((originQtyValue + changeIn) * originPrice);
             }else
             {
                 (Subject as ProductRow)
-                                .GetTotalPrice()
-                                .Should()
-                                .Be((originQtyValue - changeIn) * originPrice);
+                    .GetTotalPrice()
+                    .Should()
+                    .Be((originQtyValue - changeIn) * originPrice);
             }
 
             return new AndConstraint<GeneralProductAssertions>(this);

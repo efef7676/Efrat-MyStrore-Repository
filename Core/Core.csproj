@@ -41,14 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PriceRange.cs" />
-    <Compile Include="ProductRowStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{39D0768A-AA67-49F0-A66E-EA0533EEE9DD}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

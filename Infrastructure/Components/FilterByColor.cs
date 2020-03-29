@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using System.Drawing;
 using Extensions;
@@ -19,25 +16,11 @@ namespace Infrastructure
 
         public CatalogPage ClickOnColor(int index = 0)
         {
-            if (index < Colors.Count)
-            {
-                Colors[index].FindElement(By.CssSelector("label a")).Click();
-            }
-
-            //wait until ... ?
+            Colors[index].FindElement(By.CssSelector("label a")).Click();
 
             return new CatalogPage(Driver);
         }
-
-        public Color GetColor(int index = 0)
-        {
-            if (index < Colors.Count)
-            {
-                return Colors[index].WaitAndFindElement(By.CssSelector("input")).GetCssValue("background-color").ConvertToColor();
-            }
-
-            return new Color();//null? or exception?
-        }
+        public Color GetColor(int index = 0) => Colors[index].WaitAndFindElement(By.CssSelector("input")).GetCssValue("background-color").ConvertToColor();
 
     }
 }

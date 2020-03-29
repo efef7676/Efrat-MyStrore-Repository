@@ -1,33 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Extensions;
-using OpenQA.Selenium.Support.UI;
 
 namespace Infrastructure
 {
     public class CartPage : BasePage, IHasProducts<ProductRow>
     {
-        private List<ProductRow> _products;
         public List<ProductRow> Products
         {
             get
             {
                 var elements = Driver.FindElements(By.CssSelector("#cart_summary tbody tr"));
-                return elements == null ? _products : elements.Select(s => new ProductRow(Driver, s)).ToList();
-            }
-            set
-            {
-                _products = value;
+                return elements == null ? new List<ProductRow>() : elements.Select(s => new ProductRow(Driver, s)).ToList();
             }
         }
 
         public CartPage(IWebDriver driver) : base(driver)
         {
-            _products = new List<ProductRow>();
         }
 
         public ProductRow GetProductBy(Uri imageUri) => Products.FirstOrDefault(p => p.GetImageUri() == imageUri);
@@ -58,7 +49,6 @@ namespace Infrastructure
             else
             {
                 return null;
-                //throw an exception?
             }
 
             currentProduct

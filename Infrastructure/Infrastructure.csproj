@@ -71,11 +71,16 @@
     <Compile Include="Pages\CartPage.cs" />
     <Compile Include="Pages\CatalogPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
-    <Compile Include="Pages\ProductPage.cs" />
+    <Compile Include="Pages\DetailsProductPage.cs" />
+    <Compile Include="ProductRowStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{e26d93f4-c826-4594-8563-67e5063d730c}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Extensions\Extensions.csproj">
       <Project>{2bc95d51-d544-4410-bba2-b75abcb53e70}</Project>
       <Name>Extensions</Name>

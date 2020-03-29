@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Extensions;
 using OpenQA.Selenium.Interactions;
 
@@ -21,15 +17,7 @@ namespace Infrastructure
 
         public string GetPriceRange() => PriceRange.Text;
 
-        public void LowerMaxPrice()
-        {
-            int width = ScrollPriceRange.Size.Width;
-
-            Actions act = new Actions(Driver);
-            act.MoveToElement(ScrollPriceRange).MoveByOffset((width / 3) + 4, 0).Click().Perform();
-        }
-
-        public void ChangePrice(bool toRaiseTheMin)
+        public void ChangeFilterPrice(bool toRaiseTheMin)
         {
             int width = ScrollPriceRange.Size.Width;
             Actions act = new Actions(Driver);
